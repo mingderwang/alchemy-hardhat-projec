@@ -2,10 +2,10 @@ import '@nomiclabs/hardhat-waffle'
 import '@typechain/hardhat'
 import { HardhatUserConfig } from 'hardhat/config'
 import 'hardhat-deploy'
-import '@nomiclabs/hardhat-etherscan'
 import "@nomicfoundation/hardhat-viem";
 import 'solidity-coverage'
 import * as fs from 'fs'
+import "@nomicfoundation/hardhat-verify";
 
 const mnemonicFileName = process.env.MNEMONIC_FILE ?? `${process.env.HOME}/.secret/testnet-mnemonic.txt`
 let mnemonic = 'test '.repeat(11) + 'junk'
@@ -68,9 +68,15 @@ const config: HardhatUserConfig = {
   },
   // @ts-ignore
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY
+    apiKey: {
+     sepolia: process.env.ETHERSCAN_API_KEY
+    } 
+  },
+  sourcify: {
+    // Disabled by default
+    // Doesn't need an API key
+    enabled: false
   }
-
 }
 
 // coverage chokes on the "compilers" settings

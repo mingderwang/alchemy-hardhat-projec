@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@nomicfoundation/hardhat-verify':
+    specifier: ^2.0.4
+    version: 2.0.4(hardhat@2.20.0)
   '@nomiclabs/hardhat-etherscan':
     specifier: ^2.1.8
     version: 2.1.8(hardhat@2.20.0)
@@ -895,6 +898,25 @@ packages:
       hardhat: 2.20.0(ts-node@10.9.2)(typescript@4.9.5)
       ordinal: 1.0.3
     dev: true
+
+  /@nomicfoundation/hardhat-verify@2.0.4(hardhat@2.20.0):
+    resolution: {integrity: sha512-B8ZjhOrmbbRWqJi65jvQblzjsfYktjqj2vmOm+oc2Vu8drZbT2cjeSCRHZKbS7lOtfW78aJZSFvw+zRLCiABJA==}
+    peerDependencies:
+      hardhat: ^2.0.4
+    dependencies:
+      '@ethersproject/abi': 5.7.0
+      '@ethersproject/address': 5.7.0
+      cbor: 8.1.0
+      chalk: 2.4.2
+      debug: 4.3.4(supports-color@8.1.1)
+      hardhat: 2.20.0(ts-node@10.9.2)(typescript@4.9.5)
+      lodash.clonedeep: 4.5.0
+      semver: 6.3.1
+      table: 6.8.1
+      undici: 5.28.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /@nomicfoundation/hardhat-viem@1.0.3(hardhat@2.20.0)(typescript@4.9.5)(viem@2.7.9):
     resolution: {integrity: sha512-Yw8L/WXOjBzeRXxdC/TCUlzhD6k44L8Bm6wCdDF4/D/X0cDHT1CvBtnGuEcxp116Qcx3+5ebi3VJBx1m5w4iNw==}
@@ -3082,6 +3104,13 @@ packages:
     dependencies:
       bignumber.js: 9.1.2
       nofilter: 1.0.4
+    dev: false
+
+  /cbor@8.1.0:
+    resolution: {integrity: sha512-DwGjNW9omn6EwP70aXsn7FQJx5kO12tX0bZkaTjzdVFM6/7nhA4t0EENocKGx6D2Bch9PE2KzCUf5SceBdeijg==}
+    engines: {node: '>=12.19'}
+    dependencies:
+      nofilter: 3.1.0
     dev: false
 
   /chai-as-promised@7.1.1(chai@4.4.1):
@@ -6730,6 +6759,10 @@ packages:
   /lodash.camelcase@4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
 
+  /lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+    dev: false
+
   /lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
     dev: true
@@ -7291,6 +7324,11 @@ packages:
   /nofilter@1.0.4:
     resolution: {integrity: sha512-N8lidFp+fCz+TD51+haYdbDGrcBWwuHX40F5+z0qkUjMJ5Tp+rdSuAkMJ9N9eoolDlEVTf6u5icM+cNKkKW2mA==}
     engines: {node: '>=8'}
+    dev: false
+
+  /nofilter@3.1.0:
+    resolution: {integrity: sha512-l2NNj07e9afPnhAhvgVrCD/oy2Ai1yfLpuo3EpiO1jFTsB4sFz6oIfAfSZyQzVpkZQ9xS8ZS5g1jCBgq4Hwo0g==}
+    engines: {node: '>=12.19'}
     dev: false
 
   /nopt@3.0.6:
