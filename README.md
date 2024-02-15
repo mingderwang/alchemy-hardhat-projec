@@ -97,3 +97,22 @@ Error: transaction failed [ See: https://links.ethers.org/v5-errors-CALL_EXCEPTI
   }
 }
 ```
+
+## OK
+
+* when I removed lockTime check in Vault.sol
+
+```shell
+➜  s git:(main) ✗ npx hardhat run scripts/vaultDeploy.js --network sepolia
+No need to generate any newer typings.
+precomputed address: 0x709D6c1220A142BD5C4EDC4b1e7D30b44c21Eec0
+Deployed to: 0x709D6c1220A142BD5C4EDC4b1e7D30b44c21Eec0
+```
+
+## verification
+
+Vault.sol need to verify manually
+
+```shell
+npx hardhat verify --network sepolia 0x709D6c1220A142BD5C4EDC4b1e7D30b44c21Eec0
+```

@@ -2,7 +2,7 @@ const { bytecode } = require("../artifacts/contracts/Vault.sol/Vault.json");
 const { encoder, create2Address } = require("../utils/utils.js")
 
 const main = async () => {
-    const factoryAddr = "0x567DaC60eb2F76641BB7a39d8B8294b286D9cBC4";
+    const factoryAddr = "0x55Cff9B255CcF583B27514A5B331F3499A689717";
     const currentTimestampInSeconds = Math.round(Date.now() / 1000);
     const unlockTime = BigInt(currentTimestampInSeconds + 10);
     const saltHex = ethers.utils.id("1234");
