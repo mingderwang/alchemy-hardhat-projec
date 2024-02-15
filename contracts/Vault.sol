@@ -10,7 +10,7 @@ contract Vault {
 
     constructor(uint _unlockTime) {
         require(
-            true,
+            block.timestamp < _unlockTime,
             "Unlock time should be in the future"
         );
         unlockTime = _unlockTime;
