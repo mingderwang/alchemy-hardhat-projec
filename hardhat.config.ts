@@ -3,9 +3,8 @@ import '@typechain/hardhat'
 import { HardhatUserConfig } from 'hardhat/config'
 import 'hardhat-deploy'
 import '@nomiclabs/hardhat-etherscan'
-
+import "@nomicfoundation/hardhat-viem";
 import 'solidity-coverage'
-
 import * as fs from 'fs'
 
 const mnemonicFileName = process.env.MNEMONIC_FILE ?? `${process.env.HOME}/.secret/testnet-mnemonic.txt`
@@ -52,12 +51,19 @@ const config: HardhatUserConfig = {
       'contracts/samples/SimpleAccount.sol': optimizedComilerSettings
     }
   },
+  defaultNetwork: "sepolia",
   networks: {
     dev: { url: 'http://127.0.0.1:8545' },
     // github action starts localgeth service, for gas calculations
     localgeth: { url: 'http://localgeth:8545' },
     sepolia: getNetwork('sepolia'),
-    proxy: getNetwork1('http://localhost:8545')
+    proxy: getNetwork1('http://localhost:8545'),
+    hardhat: {
+      forking: {
+        url: `https://sepolia.infura.io/v3/${process.env.INFURA_ID}`,
+        blockNumber: 5292149
+      }
+    }
   },
   mocha: {
     timeout: 10000

