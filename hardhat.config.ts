@@ -6,6 +6,41 @@ import "@nomicfoundation/hardhat-viem";
 import 'solidity-coverage'
 import * as fs from 'fs'
 import "@nomicfoundation/hardhat-verify";
+import "xdeployer";
+const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+const { task } = require("hardhat/config");
+require("@nomiclabs/hardhat-ethers");
+
+const {
+  API_URL_OPTIMISM_SEPOLIA,
+  API_URL_POLYGON_MUMBAI,
+  API_URL_SEPOLIA,
+  API_URL_ETHEREUM,
+  API_URL_POLYGON,
+  PRIVATE_KEY,
+} = process.env;
+
+task("account", "returns nonce and balance for specified address on multiple networks")
+  .addParam("address")
+  .setAction(async address => {
+    const web3Ethereum = createAlchemyWeb3(API_URL_ETHEREUM);
+    const web3OptimismSepolia = createAlchemyWeb3(API_URL_OPTIMISM_SEPOLIA);
+    const web3Sepolia = createAlchemyWeb3(API_URL_SEPOLIA);
+    const web3Mumbai = createAlchemyWeb3(API_URL_POLYGON_MUMBAI);
+    const web3Polygon = createAlchemyWeb3(API_URL_POLYGON);
+
+    const networkIDArr = ["Optimism Sepolia:", "Sepolia:", "Polygon Mumbai:"]
+    const providerArr = [web3OptimismSepolia, web3Sepolia, web3Mumbai];
+    const resultArr = [];
+    
+    for (let i = 0; i < providerArr.length; i++) {
+      const nonce = await providerArr[i].eth.getTransactionCount(address.address, "latest");
+      const balance = await providerArr[i].eth.getBalance(address.address)
+      resultArr.push([networkIDArr[i], nonce, parseFloat(providerArr[i].utils.fromWei(balance, "ether")).toFixed(3) + "ETH"]);
+    }
+    resultArr.unshift(["  |NETWORK|   |NONCE|   |BALANCE|  "])
+    console.log(resultArr);
+  });
 
 const mnemonicFileName = process.env.MNEMONIC_FILE ?? `${process.env.HOME}/.secret/testnet-mnemonic.txt`
 let mnemonic = 'test '.repeat(11) + 'junk'
@@ -49,12 +84,13 @@ const config: HardhatUserConfig = {
       'contracts/samples/SimpleAccount.sol': optimizedComilerSettings
     }
   },
-  defaultNetwork: "sepolia",
+  defaultNetwork: "dev",
   networks: {
     dev: { url: 'http://127.0.0.1:8545' },
     // github action starts localgeth service, for gas calculations
     localgeth: { url: 'http://localgeth:8545' },
     sepolia: getNetwork('sepolia'),
+    mumbai: getNetwork('polygon-mumbai'),
     proxy: getNetwork1('http://localhost:8545'),
     hardhat: {
       forking: {
@@ -69,7 +105,8 @@ const config: HardhatUserConfig = {
   // @ts-ignore
   etherscan: {
     apiKey: {
-     sepolia: process.env.ETHERSCAN_API_KEY
+     sepolia: process.env.ETHERSCAN_API_KEY,
+     mumbai: process.env.POLYSCAN_API_KEY
     } 
   },
   sourcify: {
