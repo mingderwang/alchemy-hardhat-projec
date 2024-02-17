@@ -99,3 +99,25 @@ npx hardhat account --address 0x97e5dD3ea09304249BeC86AfC1a62B6c8EF9a6A0
 [https://sepolia.arbiscan.io/address/0xA1c83098d64DF1bAa04E7C930c033Bf4Cc04Ed0D#code](https://sepolia.arbiscan.io/address/0xA1c83098d64DF1bAa04E7C930c033Bf4Cc04Ed0D#code)
 
 [https://sepolia.etherscan.io/address/0xA1c83098d64DF1bAa04E7C930c033Bf4Cc04Ed0D#code](https://sepolia.etherscan.io/address/0xA1c83098d64DF1bAa04E7C930c033Bf4Cc04Ed0D#code)
+
+## test locktime
+
+```shell
+npx hardhat run scripts/showTimeStamp.ts
+No need to generate any newer typings.
+Lock with 0.001ETH and unlock timestamp 1708185923 deployed to address
+```
+
+or deploy and run following code in Remix
+
+```
+// SPDX-License-Identifier: AGPL-3.0-only
+pragma solidity ^0.8.7;
+    
+contract Timestamp {
+   uint public timestamp;
+   function saveTimestamp() public {
+      timestamp = block.timestamp;
+   }
+}
+```

@@ -3,7 +3,7 @@ const { encoder, create2Address } = require("../utils/utils.js")
 
 const main = async () => {
     const factoryAddr = "0xd851C0FC5DeD867033a70626DcDFe10EF7B7f433";
-    const unlockTime = 52943830000;
+    const unlockTime = 1708185670;
     const saltHex = ethers.utils.id("1234");
     const initCode = bytecode + encoder(["uint"], [unlockTime]);
 
