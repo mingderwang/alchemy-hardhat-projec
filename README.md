@@ -5,14 +5,21 @@ This project demonstrates a basic Hardhat use case. It comes with a sample contr
 Try running some of the following tasks:
 
 ```shell
--> npx hardhat run scripts/deployFactory.js --network sepolia
-Factory deployed to: 0x567DaC60eb2F76641BB7a39d8B8294b286D9cBC4
+npx hardhat run scripts/deployFactory.js --network arbitrumSepolia
+npx hardhat run scripts/deployFactory.js --network mumbai
+npx hardhat run scripts/deployFactory.js --network sepolia
+```
+
+```shell
+Factory deployed to: 0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0
+Factory deployed to: 0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0
+Factory deployed to: 0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0
 ```
 
 then, edit your scripts/vaultDeploy.js at line 5
 
 ```shell
-    const factoryAddr = "0x567DaC60eb2F76641BB7a39d8B8294b286D9cBC4";
+    const factoryAddr = "0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0";
 ```
 
 and run
@@ -116,3 +123,24 @@ Vault.sol need to verify manually
 ```shell
 npx hardhat verify --network sepolia 0x709D6c1220A142BD5C4EDC4b1e7D30b44c21Eec0
 ```
+
+## task account to make sure nonce are equal on each chain
+
+```shell
+npx hardhat account --address 0x97e5dD3ea09304249BeC86AfC1a62B6c8EF9a6A0
+[
+  [ '  |NETWORK|   |NONCE|   |BALANCE|  ' ],
+  [ 'Arbitrum Sepolia:', 1, '0.000ETH' ],
+  [ 'Sepolia:', 1, '0.684ETH' ],
+  [ 'Polygon Mumbai:', 1, '0.499ETH' ]
+]
+```
+
+
+## verified code
+
+[https://sepolia.arbiscan.io/address/0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0#code](https://sepolia.arbiscan.io/address/0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0#code)
+
+[https://mumbai.polygonscan.com/address/0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0](https://mumbai.polygonscan.com/address/0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0)
+
+[https://sepolia.etherscan.io/address/0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0](https://sepolia.etherscan.io/address/0xA17cfaB7bc4aD64C56Dd5cCB4F1321c379b14Fa0)

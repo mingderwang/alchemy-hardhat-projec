@@ -6,31 +6,29 @@ import "@nomicfoundation/hardhat-viem";
 import 'solidity-coverage'
 import * as fs from 'fs'
 import "@nomicfoundation/hardhat-verify";
-import "xdeployer";
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const { task } = require("hardhat/config");
-require("@nomiclabs/hardhat-ethers");
+import { createAlchemyWeb3 } from "@alch/alchemy-web3";
+import { task } from "hardhat/config";
+import "@nomiclabs/hardhat-ethers";
 
 const {
-  API_URL_OPTIMISM_SEPOLIA,
+  API_URL_ARBITRUM_SEPOLIA,
   API_URL_POLYGON_MUMBAI,
   API_URL_SEPOLIA,
   API_URL_ETHEREUM,
-  API_URL_POLYGON,
-  PRIVATE_KEY,
+  API_URL_POLYGON
 } = process.env;
 
 task("account", "returns nonce and balance for specified address on multiple networks")
   .addParam("address")
   .setAction(async address => {
     const web3Ethereum = createAlchemyWeb3(API_URL_ETHEREUM);
-    const web3OptimismSepolia = createAlchemyWeb3(API_URL_OPTIMISM_SEPOLIA);
+    const web3ArbitrumSepolia = createAlchemyWeb3(API_URL_ARBITRUM_SEPOLIA);
     const web3Sepolia = createAlchemyWeb3(API_URL_SEPOLIA);
     const web3Mumbai = createAlchemyWeb3(API_URL_POLYGON_MUMBAI);
     const web3Polygon = createAlchemyWeb3(API_URL_POLYGON);
 
-    const networkIDArr = ["Optimism Sepolia:", "Sepolia:", "Polygon Mumbai:"]
-    const providerArr = [web3OptimismSepolia, web3Sepolia, web3Mumbai];
+    const networkIDArr = ["Arbitrum Sepolia:", "Sepolia:", "Polygon Mumbai:"]
+    const providerArr = [web3ArbitrumSepolia, web3Sepolia, web3Mumbai];
     const resultArr = [];
     
     for (let i = 0; i < providerArr.length; i++) {
@@ -86,12 +84,30 @@ const config: HardhatUserConfig = {
   },
   defaultNetwork: "dev",
   networks: {
-    dev: { url: 'http://127.0.0.1:8545' },
-    // github action starts localgeth service, for gas calculations
-    localgeth: { url: 'http://localgeth:8545' },
-    sepolia: getNetwork('sepolia'),
-    mumbai: getNetwork('polygon-mumbai'),
-    proxy: getNetwork1('http://localhost:8545'),
+    sepolia: {
+      url: API_URL_SEPOLIA,
+      accounts: { mnemonic }
+    },
+    mumbai: {
+      url: API_URL_POLYGON_MUMBAI,
+      accounts: { mnemonic }
+    },
+    polygon: {
+      url: API_URL_POLYGON,
+      accounts: { mnemonic }
+    },
+    dev: {
+      url: API_URL_SEPOLIA,
+      accounts: { mnemonic }
+    },
+    ethereum: {
+      url: API_URL_ETHEREUM,
+      accounts: { mnemonic }
+    },
+    arbitrumSepolia: {
+      url: API_URL_ARBITRUM_SEPOLIA,
+      accounts: { mnemonic }
+    },
     hardhat: {
       forking: {
         url: `https://sepolia.infura.io/v3/${process.env.INFURA_ID}`,
@@ -102,12 +118,27 @@ const config: HardhatUserConfig = {
   mocha: {
     timeout: 10000
   },
+  // npx hardhat verify --list-networks 
+  // to get  Networks supported by hardhat-verify:
+
   // @ts-ignore
   etherscan: {
     apiKey: {
      sepolia: process.env.ETHERSCAN_API_KEY,
-     mumbai: process.env.POLYSCAN_API_KEY
-    } 
+     polygonMumbai: process.env.POLYSCAN_API_KEY,
+     optimisticSepolia: process.env.OPTIMISM_ETHERSCAN_API_KEY,
+     arbitrumSepolia: process.env.ARBITRUM_SEPOLIA_API_KEY
+    },
+    customChains: [
+    {
+      network: "optimisticSepolia",
+      chainId: 11155420 ,
+      urls: {
+        apiURL: "https://api-optimistic.etherscan.io/api",
+        browserURL: "https://optimistic.etherscan.io"
+      }
+    }
+  ] 
   },
   sourcify: {
     // Disabled by default
