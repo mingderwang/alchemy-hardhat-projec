@@ -15,7 +15,8 @@ const {
   API_URL_POLYGON_MUMBAI,
   API_URL_SEPOLIA,
   API_URL_ETHEREUM,
-  API_URL_POLYGON
+  API_URL_POLYGON,
+  ARBITRUM_SEPOLIA_API_KEY
 } = process.env;
 
 task("account", "returns nonce and balance for specified address on multiple networks")
@@ -127,7 +128,7 @@ const config: HardhatUserConfig = {
      sepolia: process.env.ETHERSCAN_API_KEY,
      polygonMumbai: process.env.POLYSCAN_API_KEY,
      optimisticSepolia: process.env.OPTIMISM_ETHERSCAN_API_KEY,
-     arbitrumSepolia: process.env.ARBITRUM_SEPOLIA_API_KEY
+     arbitrumSepolia: ARBITRUM_SEPOLIA_API_KEY
     },
     customChains: [
     {
