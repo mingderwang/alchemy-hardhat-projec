@@ -1,6 +1,6 @@
 {
   "name": "alchemy-hardhat-project",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "ISC",
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
@@ -40,6 +40,7 @@
     "@thehubbleproject/bls": "^0.5.1",
     "@typechain/hardhat": "^2.3.1",
     "@types/mocha": "^9.1.1",
+    "@zerodev/ecdsa-validator": "^5.1.0",
     "ethereumjs-util": "^7.1.5",
     "ethereumjs-wallet": "^1.0.2",
     "hardhat-deploy": "^0.11.45",
