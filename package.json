@@ -33,10 +33,11 @@
     "xdeployer": "^3.0.1"
   },
   "dependencies": {
+    "@account-abstraction/contracts": "^0.6.0",
     "@alch/alchemy-web3": "^1.4.7",
     "@nomicfoundation/hardhat-verify": "^2.0.4",
     "@nomiclabs/hardhat-etherscan": "^2.1.8",
-    "@openzeppelin/contracts": "^5.0.1",
+    "@openzeppelin/contracts": "4.9.3",
     "@thehubbleproject/bls": "^0.5.1",
     "@typechain/hardhat": "^2.3.1",
     "@types/mocha": "^9.1.1",

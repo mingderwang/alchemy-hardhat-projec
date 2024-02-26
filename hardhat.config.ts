@@ -11,6 +11,7 @@ import { task } from "hardhat/config";
 import "@nomiclabs/hardhat-ethers";
 
 const {
+  infura_API_URL_SEPOLIA,
   API_URL_ARBITRUM_SEPOLIA,
   API_URL_POLYGON_MUMBAI,
   API_URL_SEPOLIA,
@@ -86,7 +87,7 @@ const config: HardhatUserConfig = {
   defaultNetwork: "dev",
   networks: {
     sepolia: {
-      url: API_URL_SEPOLIA,
+      url:  infura_API_URL_SEPOLIA,
       accounts: { mnemonic }
     },
     mumbai: {
